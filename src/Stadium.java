@@ -20,6 +20,8 @@ public class Stadium {
         crateCharacters();
         navigation();
         move(sc.next());
+
+
     }
 
 
@@ -38,12 +40,12 @@ public class Stadium {
     }
 
     private static void bayPotion() {
-        if(player.money >= 100){
-            player.money -=100;
-            player.potion +=1;
-            pd.money += 100;
-            pd.potion -= 1;
-            System.out.println("вы купили 1 зелье. У вас теперь " + player.potion + "шт. зелья" );
+        if(player.getMoney() >= 100){
+            player.setMoney(player.getMoney() - 100);
+            player.setPotion(player.getPotion() + 1);
+            pd.setMoney(pd.getMoney() + 100);
+            pd.setPotion(pd.getPotion() - 1);
+            System.out.println("вы купили 1 зелье. У вас теперь " + player.getPotion()+ "шт. зелья" );
         } else System.out.println("Недостаточно денег");
         navigation();
         move(sc.next());
@@ -51,48 +53,49 @@ public class Stadium {
 
 
     private static void potion() {
-        if (player.potion > 0) {
-            player.health += 100;
-            player.potion -= 1;
+        if (player.getPotion() > 0) {
+            player.setHealth(player.getHealth() + 100);
+            player.setPotion(player.getPotion() - 1);
         } else {
             System.out.println("Недостаточно зелья");
         }
         pd.printInfo();
         player.printInfo();
         navigation();
+
         move(sc.next());
 
     }
 
     private static void navigation() {
-        if (player.health > 0) {
+        if (player.getHealth() > 0) {
             System.out.println("\n1.В бой 2.Лечиться 3.На рынок 4.выход");
         }
     }
 
     private static void battle() {
         int playerHit;
-        if(player.level > 1){
-       playerHit = player.damage() + 10 * player.level;}
-        else {playerHit = player.damage();}
-        player.exp += playerHit;
-        npc.health -= playerHit;
-        int npcHit = npc.damage();
-        player.health -= npcHit;
-        player.level = player.exp / 100;
+        if(player.getLevel() > 1){
+       playerHit = player.doDamage() + 10 * player.getLevel();}
+        else {playerHit = player.doDamage();}
+        player.setExp(player.getExp() + playerHit);
+        npc.setHealth(npc.getHealth() - playerHit);
+        int npcHit = npc.doDamage();
+        player.setHealth(player.getHealth() - npcHit);
+        player.setLevel(player.getExp() / 100);
 
-        if (player.health <= 0) {
-            player.health = 0;
+        if (player.getHealth() <= 0) {
+            player.setHealth(0);
             System.out.println("Вас побили...");
             System.out.println("1.Закончить игру 2.Начать заново");
              youLose(sc.next());
              return;
 
         }
-        if (npc.health <= 0) {
-            npc.health = 0;
+        if (npc.getHealth() <= 0) {
+            npc.setHealth(0);
             System.out.println("Противник номер " + count + " повержен");
-            player.money += npc.money;
+            player.setMoney(player.getMoney() + npc.getMoney());
             crateCharacters();
             navigation();
             move(sc.next());
@@ -111,7 +114,7 @@ public class Stadium {
             if(choice.equals("2")) {
                 count = 0;
                 round = 0;
-                npc.health = 0;
+                npc.setHealth(0);
                 player = null;
                 crateCharacters();
                 navigation();
@@ -126,7 +129,7 @@ public class Stadium {
 
     private static void printFinalStat() {
         System.out.printf("%s, вы провели %d раундов в %d битвах, заработали %d опыта",
-                player.name, round, count, player.exp);
+                player.getName(), round, count, player.getExp());
     }
 
     private static void crateCharacters() {
@@ -135,7 +138,7 @@ public class Stadium {
             System.out.println("введите имя_");
             player = new Player(100,10, 10, 0, 1000, 1, sc.next());
         }
-        if (npc == null || npc.health == 0) {
+        if (npc == null || npc.getHealth() == 0) {
             count++;
             npc = new NPC(100 + count * 10, 10,50 + count, 0, 100, count, "Злодей номер " + count);
         }

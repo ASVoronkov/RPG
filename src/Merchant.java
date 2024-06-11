@@ -1,9 +1,25 @@
 public abstract class Merchant implements Info {
-    String name;
-    int money, potion;
+
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getPotion() {
+        return potion;
+    }
+
+    public void setPotion(int potion) {
+        this.potion = potion;
+    }
+
+    private int money, potion;
 
     public Merchant(String name, int money, int potion) {
-        this.name = name;
         this.money = money;
         this.potion = potion;
     }

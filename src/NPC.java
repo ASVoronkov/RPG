@@ -4,11 +4,11 @@ public class NPC extends Characters{
     }
 
     @Override
-    public int damage() {
-        if(dexterity * 5 > Math.random() * 100 ) return power;
+    public int doDamage() {
+        if(getDexterity() * 5 > Math.random() * 100 ) return getPower();
         else return 0;
     }
     public void printInfo(){
-        System.out.printf("%s здоровье: %d\n", name, health);
+        System.out.printf("%s здоровье: %d\n", getName(), getHealth());
     }
 }
