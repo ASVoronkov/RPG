@@ -1,5 +1,15 @@
 public abstract class Merchant implements Info {
 
+    private  String name;
+
+    private int money, potion;
+
+    public Merchant(String name, int money, int potion) {
+        this.money = money;
+        this.potion = potion;
+        this.name = name;
+    }
+
 
     public int getMoney() {
         return money;
@@ -8,19 +18,11 @@ public abstract class Merchant implements Info {
     public void setMoney(int money) {
         this.money = money;
     }
-
     public int getPotion() {
         return potion;
     }
 
     public void setPotion(int potion) {
-        this.potion = potion;
-    }
-
-    private int money, potion;
-
-    public Merchant(String name, int money, int potion) {
-        this.money = money;
         this.potion = potion;
     }
 
